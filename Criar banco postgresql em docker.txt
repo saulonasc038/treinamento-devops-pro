@@ -1,0 +1,15 @@
+#comando criar e executar container com postgres16.4
+
+ docker run -d --name srv-postgres-curso -e POSTGRES_PASSWORD=docker_pwd -p 5432:5432 postgres:16.4
+
+#comando para criar banco de dados
+
+ docker exec -it srv-postgres-curso psql -U postgres -c "CREATE DATABASE curso_docker;"
+ 
+ #comando para criar usuário
+ 
+ docker exec -it srv-postgres-curso psql -U postgres -c "CREATE USER docker_usr WITH PASSWORD 'docker_pwd';"
+ 
+ #comando para dar permissões ao usuarui no banco
+ 
+ docker exec -it srv-postgres-curso psql -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE curso_docker TO docker_usr;"
